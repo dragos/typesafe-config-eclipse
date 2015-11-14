@@ -14,6 +14,8 @@ Update site:
 - outline view
 - auto edits, match braces
 
+![Screenshot](/images/screenshot.png?raw=true)
+
 # Limitations
 
 - no support for substitutions
