@@ -1,0 +1,88 @@
+grammar com.typesafe.config.Hocon
+
+hidden (SL_COMMENT, ML_COMMENT, SPACE)
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+generate hocon "http://www.typesafe.com/config/Hocon"
+
+Root: 
+  NL*
+  ( Object 
+    | ( members += Member (',' | NL) NL* )*
+  )
+  NL*
+;
+
+Object:
+ '{' NL*
+    ( members+=Member (',' | NL) NL* )*  
+ '}';
+
+
+Member:
+  name = StringLiteral (':' NL* | '=' NL*)? value=Literal
+;
+  
+Literal:
+  (value += SimpleLiteral)+ | Object | Array ;
+
+SimpleLiteral returns EString:
+  (StringLiteral | name = Boolean | Null | NumberLiteral)
+;
+
+Array:
+  ('[' NL*
+      (values+=Literal) 
+      ((',' | NL) NL* values+=Literal)*
+      NL* 
+  ']') | ( '[' NL* ']' )
+;
+
+Boolean:
+  'true' | 'false' | 'on' | 'off'
+;
+
+Null:
+  {Null} 'null';
+
+
+StringLiteral returns EString: 
+  (name = STRING | name = UNQUOTED_STRING)
+;
+
+NumberLiteral:
+  value = Number
+;
+
+Number:
+  '-'? INT ('.' INT)? (('E'|'e') '-'? INT)?;
+  
+terminal UNQUOTED_STRING:
+  ( !(' ' | '\n' |'\t' | '\\' | '"' | '$' |
+      '{' |  '}' | '[' | ']'  | ':' | '=' |
+      '|' |  '+' | '#' | '`'  | '^' | '?' |
+      '!' |  '@' | '*' | '&'  | '//'| ','
+  ) )+
+;
+
+terminal INT returns ecore::EInt: ('0'..'9')+;
+
+terminal STRING : 
+      '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+      "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+;
+
+terminal ML_COMMENT : '/*' -> '*/';
+// The single line comment won't include the EOL character at the end. That will be returned
+// as a separate NL token. This way comments can be used as separators at the end of a meaningful 
+// line, like # this is a comment that separates two members
+terminal SL_COMMENT   : ('//'|'#') !('\n'|'\r')*;
+
+terminal SPACE:
+  (' ' | '\t')+
+;
+
+terminal NL:
+  '\n'+
+;

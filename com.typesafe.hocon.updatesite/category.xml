@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/com.typesafe.hocon.sdk_0.0.0.jar" id="com.typesafe.hocon.sdk" version="0.0.0">
+      <category name="com.typesafe.hocon"/>
+   </feature>
+   <category-def name="com.typesafe.hocon" label="Typesafe Config Language"/>
+</site>
