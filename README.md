@@ -6,7 +6,7 @@ This project provides Eclipse toolings for editing configuration files in Hocon 
 
 Eclipse Marketplace:
 
-Update site:
+Update site: https://dl.bintray.com/dragos/typesafe-config-eclipse/
 
 # Features
 
