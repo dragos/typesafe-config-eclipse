@@ -29,4 +29,4 @@ Run `mvn` inside `com.typesafe.hocon.releng`.
 
 # Contribute
 
-The project is based on [xtext](https://www.eclipse.org/Xtext/index.html). Help in the form of code contributions are very welcome!
+The project is based on [xtext](https://www.eclipse.org/Xtext/index.html). Help in the form of code contributions is most welcome!
