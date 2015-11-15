@@ -12,3 +12,8 @@
 hs_err_pid*
 
 .settings/
+
+generated/
+generated-sources/
+src-gen/
+xtend-gen/

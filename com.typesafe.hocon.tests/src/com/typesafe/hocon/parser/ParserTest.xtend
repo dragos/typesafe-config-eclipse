@@ -10,13 +10,13 @@ import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@InjectWith(HoconInjectorProvider)
 @RunWith(XtextRunner)
-class ParserTests {
-  
+@InjectWith(HoconInjectorProvider)
+class ParserTest {
+
   @Inject
   ParseHelper<Root> parser
-  
+
   @Test
   def void parseSimpleJson() {
     succeeds('''
@@ -27,10 +27,10 @@ class ParserTests {
         "b": [1, 2, 3],
         "c": true,
         "d": false
-      } 
+      }
     ''')
   }
-  
+
   @Test
   def void parseSimpleHocon() {
     succeeds('''
@@ -45,7 +45,7 @@ class ParserTests {
       inner {
         value = 10 # this is an example
         bar = -100,
-        
+
         # and another
         array = [
           1, 2, 3
@@ -56,7 +56,7 @@ class ParserTests {
     }
     ''')
   }
-  
+
   // taken from the typesafe config test suite
   @Test
   def void complexHocon() {
@@ -95,7 +95,7 @@ class ParserTests {
         }
     ''')
   }
-  
+
   private def void succeeds(String text) {
     val model = parser.parse(text)
     Assert.assertTrue("No errors expected, but errors found: " + model.eResource.errors, model.eResource.errors.empty)

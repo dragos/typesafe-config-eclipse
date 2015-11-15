@@ -61,7 +61,10 @@ Workflow {
     	projectNameUi = "${projectName}.ui"
     	encoding = encoding
     	language = auto-inject {
-    		uri = grammarURI
+            // make sure we use the resourceSet created during standalone setup.
+            forcedResourceSet = theResourceSet
+
+            uri = grammarURI
 
     		// Java API to access grammar elements (required by several other fragments)
     		fragment = grammarAccess.GrammarAccessFragment auto-inject {}
