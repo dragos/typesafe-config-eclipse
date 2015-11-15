@@ -3,11 +3,67 @@
  */
 package com.typesafe.config.ui.contentassist
 
-import com.typesafe.config.ui.contentassist.AbstractHoconProposalProvider
+import com.typesafe.config.hocon.HObject
+import com.typesafe.config.hocon.Path
+import com.typesafe.config.hocon.Root
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.Assignment
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
  * on how to customize the content assistant.
  */
 class HoconProposalProvider extends AbstractHoconProposalProvider {
+
+  /**
+   * Return the member object that corresponds to the given path. For example,
+   * if the path is `foo, bar` it will walk through the members of `owner` using
+   * the first key that matches `foo` and that is an HObject, and then the same for
+   * bar.
+   *
+   * @note Using `Root` instead of `HObject` because HObject is a subtype of Root,
+   *       and we treat Root as an object anyway
+   * @return null if no such path is found
+   */
+  private def Root findMemberObject(Root owner, Iterable<String> path) {
+    if (path.isEmpty)
+      owner
+    else {
+      val tmp = owner.members.findFirst [
+        (it.value instanceof Root) && (path.head == it.key.elements.get(0).name)
+      ]
+      if (tmp != null)
+        findMemberObject(tmp.value as HObject, path.tail)
+      else
+        null
+    }
+  }
+
+  override def void completePath_Elements(EObject model, Assignment assignment, ContentAssistContext context,
+    ICompletionProposalAcceptor acceptor) {
+    super.completePath_Elements(model, assignment, context, acceptor)
+
+    val owner = switch prefix: model {
+      Path: {
+        val base = EcoreUtil2.getContainerOfType(prefix, typeof(Root))
+        val t = prefix.elements.map[it.name].toList
+        findMemberObject(base, t)
+      }
+      Root:
+        prefix
+    }
+
+    val keys = owner.members.map[it.key]
+
+    val names = keys.map [
+      val elems = it.elements
+      elems.drop(1).fold(elems.head.name)[p1, p2|p1 + '.' + p2.name]
+    ]
+
+    for (n : names)
+      acceptor.accept(createCompletionProposal(n, context))
+  }
 }
