@@ -6,26 +6,28 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 generate hocon "http://www.typesafe.com/config/Hocon"
 
+// here it would be good to find a way to
+// create a synthetic HObject around the members...
 Root: 
   NL*
-  ( Object 
+  ( HObject
     | ( members += Member (',' | NL) NL* )*
   )
   NL*
 ;
 
-Object:
+HObject:
  '{' NL*
-    ( members+=Member (',' | NL) NL* )*  
+    ( members += Member (',' | NL) NL* )*
  '}';
 
 
 Member:
-  name = StringLiteral (':' NL* | '=' NL*)? value=Literal
+  key = Path (':' NL* | '=' NL*)? value = Literal
 ;
   
 Literal:
-  (value += SimpleLiteral)+ | Object | Array ;
+  (value += SimpleLiteral)+ | HObject | Array ;
 
 SimpleLiteral returns EString:
   (StringLiteral | name = Boolean | Null | NumberLiteral)
@@ -46,10 +48,14 @@ Boolean:
 Null:
   {Null} 'null';
 
+Path:
+  elements += StringLiteral ( '.' elements += StringLiteral)*
+;
 
 StringLiteral returns EString: 
   (name = STRING | name = UNQUOTED_STRING)
 ;
+
 
 NumberLiteral:
   value = Number
@@ -62,7 +68,7 @@ terminal UNQUOTED_STRING:
   ( !(' ' | '\n' |'\t' | '\\' | '"' | '$' |
       '{' |  '}' | '[' | ']'  | ':' | '=' |
       '|' |  '+' | '#' | '`'  | '^' | '?' |
-      '!' |  '@' | '*' | '&'  | '//'| ','
+      '!' |  '@' | '*' | '&'  | '//'| ',' | '.'
   ) )+
 ;
 

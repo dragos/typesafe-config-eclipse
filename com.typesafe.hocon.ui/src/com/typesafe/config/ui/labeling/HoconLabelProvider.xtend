@@ -23,13 +23,18 @@ class HoconLabelProvider extends org.eclipse.xtext.ui.label.DefaultEObjectLabelP
 
 	// Labels and icons can be computed like this:
 	
-	def text(Member ele) {
-	  if (ele.value != null
-	     && ele.value.value.size == 1 
-	     && ele.value.value.get(0) instanceof EString)
-		  ele.name.getText + ": " + ele.value.value.get(0).getText
+	def text(Member m) {
+	  // concatenate the path, in case there are several elements
+	  // we know there is at least one element (from the grammar)
+	  val elems = m.key.elements
+	  val name = elems.drop(1).fold(elems.head.name) [p1, p2| p1 + '.' + p2.name]
+
+	  if (m.value != null
+	     && m.value.value.size == 1 
+	     && m.value.value.get(0) instanceof EString)
+		  name + ": " + m.value.value.get(0).getText
 		else
-		  ele.name.getText
+		  name
 	}
 	
 	def text(Array l) {
