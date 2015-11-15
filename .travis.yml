@@ -1,0 +1,2 @@
+language: Java
+script: cd com.typesafe.hocon.releng && mvn install
