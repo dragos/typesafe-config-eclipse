@@ -1,2 +1,2 @@
 language: Java
-script: cd com.typesafe.hocon.releng && mvn install
+script: cd com.typesafe.hocon.releng && mvn package

@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/dragos/typesafe-config-eclipse.svg?branch=master)](https://travis-ci.org/dragos/typesafe-config-eclipse)
+
 # Eclipse plugin for Typesafe Config files
 
 This project provides Eclipse toolings for editing configuration files in Hocon format (coloquially called [Typesafe Config](https://github.com/typesafehub/config)).
