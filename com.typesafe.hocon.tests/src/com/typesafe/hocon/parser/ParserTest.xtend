@@ -96,6 +96,16 @@ class ParserTest {
     ''')
   }
 
+  @Test
+  def void testLineFeed() {
+    succeeds("test {\n a = 2 \n}\n")
+  }
+  
+  @Test
+  def void testCarriageReturnLineFeed() {
+    succeeds("test {\r\n a = 2 \r\n}\r\n")
+  }
+
   private def void succeeds(String text) {
     val model = parser.parse(text)
     Assert.assertTrue("No errors expected, but errors found: " + model.eResource.errors, model.eResource.errors.empty)
