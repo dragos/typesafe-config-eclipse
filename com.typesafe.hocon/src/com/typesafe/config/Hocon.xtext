@@ -84,5 +84,5 @@ terminal SPACE:
 ;
 
 terminal NL:
-  '\n'+
+  ('\r'|'\n')+
 ;
