@@ -17,3 +17,4 @@ generated/
 generated-sources/
 src-gen/
 xtend-gen/
+target/
