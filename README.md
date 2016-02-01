@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/dragos/typesafe-config-eclipse.svg?branch=master)](https://travis-ci.org/dragos/typesafe-config-eclipse)
+[ ![Download](https://api.bintray.com/packages/dragos/typesafe-config-eclipse/typesafe-config-eclipse/images/download.svg) ](https://bintray.com/dragos/typesafe-config-eclipse/typesafe-config-eclipse/_latestVersion)
 
 # Eclipse plugin for Typesafe Config files
 
