@@ -22,7 +22,6 @@ Alternatively, use the plain old update site: https://dl.bintray.com/dragos/type
 
 # Limitations
 
-- no support for substitutions
 - no completion or hyperlinking
 
 # Build
