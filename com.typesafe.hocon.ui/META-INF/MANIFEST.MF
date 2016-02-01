@@ -21,5 +21,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: com.typesafe.config.ui.quickfix,
  com.typesafe.config.ui.contentassist,
  com.typesafe.config.ui.internal,
- com.typesafe.config.ui.contentassist.antlr
+ com.typesafe.config.ui.contentassist.antlr,
+ com.typesafe.config.ui.contentassist.antlr.internal
 Bundle-Activator: com.typesafe.config.ui.internal.HoconActivator

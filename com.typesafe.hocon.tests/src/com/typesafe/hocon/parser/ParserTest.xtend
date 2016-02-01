@@ -116,6 +116,10 @@ class ParserTest {
     succeeds("foo = 10")
   }
 
+  @Test
+  def void testSubstitution() {
+    succeeds("${foo.bar} += ${akka.timeout}\n")
+  }
   private def void succeeds(String text) {
     val model = parser.parse(text)
     Assert.assertTrue("No errors expected, but errors found: " + model.eResource.errors, model.eResource.errors.empty)

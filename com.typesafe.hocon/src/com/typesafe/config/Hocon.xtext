@@ -50,7 +50,7 @@ Null:
 
 
 StringLiteral returns EString: 
-  (name = STRING | name = UNQUOTED_STRING)
+  (name = STRING | name = UNQUOTED_STRING | '${' UNQUOTED_STRING '}')
 ;
 
 NumberLiteral:
