@@ -8,8 +8,10 @@ generate hocon "http://www.typesafe.com/config/Hocon"
 
 Root: 
   NL*
-  ( Object 
-    | ( members += Member (',' | NL) NL* )*
+  (
+      Object 
+    | members += Member
+        ( (',' | NL) NL* members += Member )*
   )
   NL*
 ;
@@ -21,7 +23,7 @@ Object:
 
 
 Member:
-  name = StringLiteral (':' NL* | '=' NL*)? value=Literal
+  name = StringLiteral (':' NL* | '+'? '=' NL*)? value=Literal
 ;
   
 Literal:
@@ -58,6 +60,8 @@ NumberLiteral:
 Number:
   '-'? INT ('.' INT)? (('E'|'e') '-'? INT)?;
   
+terminal INT returns ecore::EInt: ('0'..'9')+;
+
 terminal UNQUOTED_STRING:
   ( !(' ' | '\n' |'\t' | '\\' | '"' | '$' |
       '{' |  '}' | '[' | ']'  | ':' | '=' |
@@ -65,8 +69,6 @@ terminal UNQUOTED_STRING:
       '!' |  '@' | '*' | '&'  | '//'| ','
   ) )+
 ;
-
-terminal INT returns ecore::EInt: ('0'..'9')+;
 
 terminal STRING : 
       '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |

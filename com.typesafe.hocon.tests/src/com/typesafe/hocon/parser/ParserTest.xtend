@@ -106,6 +106,16 @@ class ParserTest {
     succeeds("test {\r\n a = 2 \r\n}\r\n")
   }
 
+  @Test
+  def void testPlusEquals() {
+    succeeds("foo += 10\n")
+  }
+
+  @Test
+  def void testEOF() {
+    succeeds("foo = 10")
+  }
+
   private def void succeeds(String text) {
     val model = parser.parse(text)
     Assert.assertTrue("No errors expected, but errors found: " + model.eResource.errors, model.eResource.errors.empty)
