@@ -17,6 +17,8 @@ Alternatively, use the plain old update site: https://dl.bintray.com/dragos/type
 
 - configurable syntax highlighting and error checking
 - outline view
+- toggle comments
+- structured selection (syntax-aware increase/decrease selection)
 - auto edits, match braces
 
 ![Screenshot](/images/screenshot.png?raw=true)
