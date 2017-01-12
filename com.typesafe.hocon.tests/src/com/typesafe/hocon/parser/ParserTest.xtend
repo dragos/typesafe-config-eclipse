@@ -126,8 +126,81 @@ class ParserTest {
     succeeds("foo = ${?SUB}")
   }
 
+  @Test
+  def void testObjectOneMemberOnSingleLine() {
+    succeeds("{y: 1}")
+  }
+
+  @Test
+  def void testObjectTwoMembersOnSingleLine() {
+    succeeds("{y: 1, z : 1}")
+  }
+
+  @Test
+  def void testObjectTwoMembersOnSingleLineViaEquals() {
+    succeeds("{y = 1, z = 1}")
+  }
+
+  @Test
+  def void testObjectAssignmentOneMemberOnSingleLine() {
+    succeeds("x = {y: 1}")
+  }
+
+  @Test
+  def void testObjectAssignmentTwoMembersOnSingleLine() {
+    succeeds("x = {y: 1, z : 1}")
+  }
+
+  @Test
+  def void testObjectAssignmentTwoMembersOnSingleLineViaEquals() {
+    succeeds("x = { y = 1, z = 1}")
+  }
+
+  @Test
+  def void testObjectAssignmentWithoutSemicolonLineBreak() {
+    succeeds('''x = {y: 1
+                     z: 1}''')
+  }
+
+  @Test
+  def void testObjectWithoutSemicolonLineBreak() {
+    succeeds('''{y : 1 
+                 z : 1}''')
+  }
+
+  @Test
+  def void testObjectWithoutSemicolonLineBreakViaEquals() {
+    succeeds('''{y = 1 
+                 z = 1}''')
+  }
+
+  @Test
+  def void testObjectTwoMemberAssignmentsOnOneLine() {
+    fails("{y : 1 z : 1}")
+  }
+
+  @Test
+  def void testObjectTwoMemberAssignmentsOnOneLineViaEquals() {
+    fails("{y = 1 z = 1}")
+  }
+
+  @Test
+  def void testTwoAssignmentsOnOneLine() {
+    fails("y : 1 z : 1")
+  }
+
+  @Test
+  def void testTwoAssignmentsOnOneLineViaEquals() {
+    fails("y = 1 z = 1")
+  }
+
   private def void succeeds(String text) {
     val model = parser.parse(text)
     Assert.assertTrue("No errors expected, but errors found: " + model.eResource.errors, model.eResource.errors.empty)
+  }
+
+  private def void fails(String text) {
+    val model = parser.parse(text)
+    Assert.assertFalse("Error expected, but no error found", model.eResource.errors.empty)
   }
 }

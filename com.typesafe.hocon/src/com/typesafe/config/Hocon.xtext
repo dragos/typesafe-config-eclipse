@@ -18,7 +18,7 @@ Root:
 
 Object:
  '{' NL*
-    ( members+=Member (',' | NL) NL* )*  
+    ( members+=Member ','? NL* )*  
  '}';
 
 
