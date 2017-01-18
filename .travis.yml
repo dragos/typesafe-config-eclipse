@@ -1,4 +1,5 @@
 language: Java
+before_install: echo "MAVEN_OPTS='-Xmx2048m -XX:MaxPermSize=512m'" > ~/.mavenrc
 script: cd com.typesafe.hocon.releng && mvn package
 
 cache:
