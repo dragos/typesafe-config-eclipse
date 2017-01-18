@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: com.typesafe.hocon.tests
 Bundle-Vendor: My Company
-Bundle-Version: 1.0.3.qualifier
+Bundle-Version: 1.0.5.qualifier
 Bundle-SymbolicName: com.typesafe.hocon.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: com.typesafe.hocon,
