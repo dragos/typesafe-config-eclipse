@@ -32,6 +32,15 @@ Alternatively, use the plain old update site: https://dl.bintray.com/dragos/type
 
 Run `mvn` inside `com.typesafe.hocon.releng`.
 
+# Cut a release
+
+- check that the current version is correct (1 ahead of the latest release)
+- build release
+- `./publish.sh <BintrayAPIkey> <version>`, where `<version>` is a non-SNAPSHOT version.
+Say, the current version in `pom.xml` is `1.0.5-SNAPSHOT`, you should call `./publish.sh` with `1.0.5`
+- tag (e.g. (`git tag v1.0.5`) and push tags
+- bump version (inside `com.typesafe.hocon.releng`): `mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=1.0.6-SNAPSHOT`
+
 # Contribute
 
 The project is based on [xtext](https://www.eclipse.org/Xtext/index.html). Help in the form of code contributions is most welcome!
