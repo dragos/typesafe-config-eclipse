@@ -8,7 +8,8 @@ This project provides Eclipse toolings for editing configuration files in Hocon 
 # Installation
 
 ### Eclipse Marketplace:
-<a href="http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=2607663" class="drag" title="Drag to your running Eclipse workspace to install Typesafe Config SDK"><img src="https://marketplace.eclipse.org/sites/all/themes/solstice/_themes/solstice_marketplace/public/images/btn-install.png" alt="Drag to your running Eclipse workspace to install Typesafe Config SDK" /></a> Drag the install button on your running Eclipse application
+<a href="http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=2607663" class="drag" title="Drag to your running Eclipse workspace."><img class="img-responsive" src="https://marketplace.eclipse.org/sites/all/themes/solstice/public/images/marketplace/btn-install.png" alt="Drag to your running Eclipse workspace." /></a>
+Drag the install button on your running Eclipse application
 
 ### Update site
 Alternatively, use the plain old update site: https://dl.bintray.com/dragos/typesafe-config-eclipse/
