@@ -6,7 +6,7 @@
 		<relativePath>../com.typesafe.hocon.releng/pom.xml</relativePath>
 		<groupId>com.typesafe.hocon</groupId>
 		<artifactId>parent</artifactId>
-		<version>1.0.5-SNAPSHOT</version>
+		<version>1.0.6-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>com.typesafe.hocon.ui</artifactId>
