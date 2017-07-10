@@ -82,6 +82,8 @@ class ParserTest {
           // This is a map with some nested maps and arrays within it, as well as some concatenations
           qux {
             baz: abc 123
+            biz: [element1, element2] [element3, element4]
+            buz: [prependelementtoarray] ${arrayref}
             bar: {
               baz: abcdefg
               bar: {
