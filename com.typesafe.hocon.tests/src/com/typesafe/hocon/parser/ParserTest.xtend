@@ -118,7 +118,7 @@ class ParserTest {
 
   @Test
   def void testSubstitution() {
-    succeeds("${foo.bar} += ${akka.timeout}\n")
+    succeeds("foo.bar += ${akka.timeout}\n")
   }
 
   @Test
