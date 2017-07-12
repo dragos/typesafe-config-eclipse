@@ -24,7 +24,7 @@ class HoconOutlineTreeProvider extends org.eclipse.xtext.ui.editor.outline.impl.
   }
 
   def protected _isLeaf(Literal modelElement) {
-    if (modelElement.value instanceof EString)
+    if (modelElement.simpleLiterals instanceof EString)
       true
     else
       super._isLeaf(modelElement)
@@ -33,10 +33,10 @@ class HoconOutlineTreeProvider extends org.eclipse.xtext.ui.editor.outline.impl.
   override protected _createChildren(IOutlineNode parentNode, EObject modelElement) {
     switch modelElement {
       Member :
-        switch v: modelElement.value {
+        switch v: modelElement.memberValue {
           EString: {}
           Array: 
-            super._createChildren(parentNode, v.values.get(0))
+            super._createChildren(parentNode, v.arrayValues.get(0))
           Object:
             super._createChildren(parentNode, v)
         }

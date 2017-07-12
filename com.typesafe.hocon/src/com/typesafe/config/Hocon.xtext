@@ -23,22 +23,22 @@ Object:
 
 
 Member:
-  name = StringLiteral (':' NL* | '+'? '=' NL*)? value=Literal
+  name = StringLiteral (':' NL* | '+'? '=' NL*)? memberValue=Literal
 ;
   
 Literal:
-  (value += SimpleLiteral)+ | Object | (value += Array)+ ;
+  (simpleLiterals += SimpleLiteral)+ | Object | (arrays += Array)+ ;
 
 SimpleLiteral returns EString:
-  (StringLiteral | name = Boolean | Null | NumberLiteral | Substitution)
+  (StringLiteral | name = Boolean | Null | Number | Substitution)
 ;
 
 Array:
   ('[' NL*
-      (values+=Literal) 
-      ((',' | NL) NL* values+=Literal)*
+      (arrayValues+=Literal) 
+      ((',' | NL) NL* arrayValues+=Literal)*
       NL* 
-  ']') | Substitution | ( '[' NL* ']' )
+  ']') | (arrayValues+=Substitution) | ( '[' NL* ']' )
 ;
 
 Boolean:
@@ -55,10 +55,6 @@ StringLiteral returns EString:
 
 Substitution returns EString:
   '${' ('?')? UNQUOTED_STRING '}'
-;
-
-NumberLiteral:
-  value = Number
 ;
 
 Number:
