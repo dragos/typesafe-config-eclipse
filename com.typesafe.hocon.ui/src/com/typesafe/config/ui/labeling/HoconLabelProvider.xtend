@@ -24,14 +24,21 @@ class HoconLabelProvider extends org.eclipse.xtext.ui.label.DefaultEObjectLabelP
 	// Labels and icons can be computed like this:
 	
 	def text(Member ele) {
-	  if (ele.value != null
-	     && ele.value.value.size == 1 
-	     && ele.value.value.get(0) instanceof EString)
-		  ele.name.getText + ": " + ele.value.value.get(0).getText
+	  if (ele.memberValue != null
+	     && ele.memberValue.simpleLiterals.size == 1 
+	     && ele.memberValue.simpleLiterals.get(0) instanceof EString)
+		  ele.name.getText + ": " + ele.memberValue.simpleLiterals.get(0).getText
 		else
 		  ele.name.getText
 	}
 	
+	def text(Literal l) {
+	  if (l != null
+	     && l.simpleLiterals.size == 1 
+	     && l.simpleLiterals.get(0) instanceof EString)
+		  l.simpleLiterals.get(0).getText
+        }
+
 	def text(Array l) {
 	  "[]"
 	}
