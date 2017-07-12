@@ -27,10 +27,10 @@ Member:
 ;
   
 Literal:
-  (value += SimpleLiteral)+ | Object | Array ;
+  (value += SimpleLiteral)+ | Object | (value += Array)+ ;
 
 SimpleLiteral returns EString:
-  (StringLiteral | name = Boolean | Null | NumberLiteral)
+  (StringLiteral | name = Boolean | Null | NumberLiteral | Substitution)
 ;
 
 Array:
@@ -38,7 +38,7 @@ Array:
       (values+=Literal) 
       ((',' | NL) NL* values+=Literal)*
       NL* 
-  ']') | ( '[' NL* ']' )
+  ']') | Substitution | ( '[' NL* ']' )
 ;
 
 Boolean:
@@ -50,7 +50,11 @@ Null:
 
 
 StringLiteral returns EString: 
-  (name = STRING | name = UNQUOTED_STRING | '${' ('?')? UNQUOTED_STRING '}')
+  (name = STRING | name = UNQUOTED_STRING)
+;
+
+Substitution returns EString:
+  '${' ('?')? UNQUOTED_STRING '}'
 ;
 
 NumberLiteral:
