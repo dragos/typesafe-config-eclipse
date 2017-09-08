@@ -2,7 +2,7 @@
 <feature
       id="com.typesafe.hocon.sdk"
       label="Typesafe Config Hocon Feature"
-      version="1.0.6.qualifier">
+      version="1.0.7.qualifier">
 
    <license url="http://www.apache.org/licenses/LICENSE-2.0">
       Apache License
